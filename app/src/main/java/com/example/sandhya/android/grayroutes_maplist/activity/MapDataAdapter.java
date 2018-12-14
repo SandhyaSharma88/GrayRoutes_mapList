@@ -1,7 +1,9 @@
 package com.example.sandhya.android.grayroutes_maplist.activity;
 
+import android.location.Address;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +32,12 @@ class MapDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         mapsViewHolder mapsListViewHolder = (mapsViewHolder) viewHolder;
-        mapsListViewHolder.setData(list.get(i));    }
+        mapsListViewHolder.setData(list.get(i));
+    }
 
     @Override
     public int getItemCount() {
+        Log.i("SIZE", list.size() + " ");
         return list.size();
     }
 
@@ -41,14 +45,15 @@ class MapDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public ImageView mapImage;
         public TextView latlng;
-        public TextView address;
+        public TextView address_view;
         public MapData list;
+        public Address address;
 
         public mapsViewHolder(View itemView) {
             super(itemView);
             mapImage = itemView.findViewById(R.id.map_image);
             latlng = itemView.findViewById(R.id.map_latLng);
-            address = itemView.findViewById(R.id.map_addr);
+            address_view = itemView.findViewById(R.id.map_addr);
         }
 
         private void setData(MapData mapData) {
@@ -56,14 +61,20 @@ class MapDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             mapImage.setImageBitmap(list.getImage());
             String latLong = list.getLat() + "," + list.getLon();
-            latlng.setText(latLong);
-            address.setText(list.getAddress().toString());
+            latlng.setText("Latitude&Longitude: " +latLong);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            StringBuilder sb = new StringBuilder();
+            if (mapData.getAddress().size() > 0) {
+
+                address = mapData.getAddress().get(0);
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    sb.append(address.getAddressLine(i)).append("\n");
                 }
-            });
+                sb.append(address.getCountryName());
+                String result = sb.toString();
+                address_view.setText("Address: "+result);
+
+            }
         }
-      }
     }
+}

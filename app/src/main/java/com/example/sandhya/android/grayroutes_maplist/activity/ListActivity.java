@@ -46,12 +46,14 @@ public class ListActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //method for fetching data from db and mapping it to corresponding objects
         createMapDataList();
 
+        //Setting and recycler view to display images and address
         MapDataAdapter mapDataAdapter = new MapDataAdapter(list);
-        mapList_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mapList_recyclerView.setAdapter(mapDataAdapter);
+
+        mapList_recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -71,7 +73,7 @@ public class ListActivity extends AppCompatActivity {
                 int index2 = cursor.getColumnIndex(MapDataContract.MapDataEntry.COLUMN_IMAGE);
                 int index3 = cursor.getColumnIndex(MapDataContract.MapDataEntry.COLUMN_LAT);
                 int index4 = cursor.getColumnIndex(MapDataContract.MapDataEntry.COLUMN_LON);
-                int cid = cursor.getInt(index);
+                //int cid = cursor.getInt(index);
 
                 byte[] image = cursor.getBlob(index2);
                 Double lat = cursor.getDouble(index3);

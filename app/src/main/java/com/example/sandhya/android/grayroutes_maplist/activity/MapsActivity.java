@@ -35,7 +35,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     TextView mCameraTextView;
 
     //@BindView(R.id.map_image)
-  //  ImageView mImageView;
+    //  ImageView mImageView;
 
     private GoogleMap mMap;
     byte[] imageArray;
@@ -109,14 +109,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-          //  mImageView.setImageBitmap(imageBitmap);
-
             imageArray = bitmapToByteArray(imageBitmap);
         }
 
+        // saving image, latitude and longitude in db
         MapDataHelper db = new MapDataHelper(this);
-        db.insertMap(imageArray,latitude, longitude);
+        db.insertMap(imageArray, latitude, longitude);
 
+        //setting marker on the tagged point with an info window
         addMarker(latLong);
     }
 
@@ -124,12 +124,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapLongClick(LatLng latLng) {
         Log.i(TAG, "long pressed, point=" + latLng);
 
+        latitude = latLng.latitude;
+        longitude = latLng.longitude;
+        latLong = latLng;
         takePictureIntent();
-        //performAction(latLng);
-        addMarker(latLng);
     }
 
-    private void addMarker(LatLng latLng){
+    private void addMarker(LatLng latLng) {
 
         String snippet = String.format(Locale.getDefault(),
                 "Lat: %1$.5f, Long: %2$.5f",

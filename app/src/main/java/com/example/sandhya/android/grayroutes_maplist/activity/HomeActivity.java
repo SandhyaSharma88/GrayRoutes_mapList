@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //On click listeners for selecting between map view and list view.
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,8 +39,9 @@ public class HomeActivity extends AppCompatActivity {
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this,ListActivity.class);
-                startActivity(i);            }
+                Intent i = new Intent(HomeActivity.this, ListActivity.class);
+                startActivity(i);
+            }
         });
     }
 }
