@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/map"
+        android:text="Click here for Map view!"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="150dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/list"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="150dp"
+        android:text="Click here to view saved data! "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
